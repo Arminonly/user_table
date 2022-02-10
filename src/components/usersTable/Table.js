@@ -90,7 +90,7 @@ export default function UserTable() {
   const dataSource = users.map((item) => ({ ...item, key: item.id }))
   return (
     <div>
-      <HeaderTitle/>
+      <HeaderTitle />
 
       <Table
         columns={columns}

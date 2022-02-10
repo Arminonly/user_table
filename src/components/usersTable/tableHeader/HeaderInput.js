@@ -1,12 +1,18 @@
 import React from 'react'
 import { Input, Space } from 'antd'
-const { Search } = Input
+import {users} from '../../usersTable/data' 
 
 export const HeaderInput = () => {
   const onSearch = (value) => console.log(value)
+   const [value, setValue] = React.useState('')
+  const { Search } = Input
 
-  const [value, setValue] = React.useState('')
+  const filteredUsers = users.filter((user)=>{
+    return user.name.toLowerCase().includes(value.toLowerCase())
+  })
+console.log(filteredUsers);
 
+ 
   return (
     <Space style={{ marginTop: '30px' }}>
       <Search
@@ -14,6 +20,7 @@ export const HeaderInput = () => {
         onChange={(e) => setValue(e.target.value)}
         placeholder="поиск"
         onSearch={onSearch}
+        filteredusers={filteredUsers}
       />
     </Space>
   )

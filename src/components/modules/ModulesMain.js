@@ -23,7 +23,7 @@ const ModulesMain = () => {
         onClick={() => navigate('/Users')}
         style={{ backgroundColor: 'lime', cursor: 'pointer' }}
       >
-        Вернуться к таблице
+        НАЗАД
       </button>
       <Row>
         <Col style={{ height: '100vh' }} span={20} offset={2}>

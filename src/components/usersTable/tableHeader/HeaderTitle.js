@@ -3,8 +3,12 @@ import { Row, Col} from 'antd'
 import { HeaderText } from './HeaderText'
 import  HeaderButton  from './HeaderButton'
 import { HeaderInput } from './HeaderInput'
+import {users} from '../../usersTable/data' 
+
+
 
 export const HeaderTitle = () => {
+  const [value, setValue] = React.useState('')
   return (
 <>
 

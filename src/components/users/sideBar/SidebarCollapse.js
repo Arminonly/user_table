@@ -9,6 +9,11 @@ export const SidebarCollapse = () => {
   //   }
   const text1 = 'Динамика студентов'
   const text2 = 'Рейтинг благодарности'
+  const style={
+    color:'white'
+  } 
+  const header = "Все пользователи"
+ 
   return (
     <Collapse
       style={{
@@ -22,7 +27,7 @@ export const SidebarCollapse = () => {
       defaultActiveKey={['0']}
       //  onChange={callback}
     >
-      <Panel  header="Все пользователи" key="1" style={{ cursor: 'pointer', }}>
+      <Panel  header={header} key="1" style={{ cursor: 'pointer', }}>
         <p style={{color:'#8A9597',marginLeft:'50px'}}>{text1}</p>
         <p style={{color:'#8A9597',marginLeft:'50px'}}>{text2}</p>
       </Panel>

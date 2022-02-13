@@ -15,7 +15,7 @@ export default function Users() {
         <Sider
           style={{
             backgroundColor: '#00693E	',
-            height: '800px',
+            height: '820px',
             border: '4px solid #8B00FF',
           }}
           width="350"

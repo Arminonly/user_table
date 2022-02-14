@@ -1,20 +1,118 @@
-import React, { useState } from 'react'
-import { Table, Tag, Space, Input, Modal } from 'antd'
+import React, { useState, useRef } from 'react'
+import { Link } from 'react-router-dom'
+import { Table, Tag, Space, Input, Modal, Button } from 'antd'
+import Highlighter from 'react-highlight-words'
+import { SearchOutlined } from '@ant-design/icons'
+
 import { users } from './data'
 import { HeaderTitle } from './tableHeader/HeaderTitle'
-import { Link } from 'react-router-dom'
 
 export default function UserTable() {
   const dataSource = users.map((item) => ({ ...item, key: item.id }))
+  const [searchText, setSearchText] = useState('')
+  const [searchColumn, setSearchColumn] = useState('')
+  
+
+  const getColumnSearchProps = (dataIndex) => ({
+    filterDropdown: ({
+      setSelectedKeys,
+      selectedKeys,
+      confirm,
+      clearFilters
+    }) => (
+      <div style={{ padding: 8 }}>
+        <Input
+          // ref={node => {
+          //   searchInput = node;
+          // }}
+          placeholder={`Search ${dataIndex}`}
+          value={selectedKeys[0]}
+          onChange={(e) =>
+            setSelectedKeys(e.target.value ? [e.target.value] : [])
+          }
+          onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+          style={{ marginBottom: 8, display: 'block' }}
+        />
+        <Space>
+          <Button
+            type="primary"
+            onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+            icon={<SearchOutlined />}
+            size="small"
+            style={{ width: 90 }}
+          >
+            Search
+          </Button>
+          <Button
+            onClick={() => handleReset(clearFilters)}
+            size="small"
+            style={{ width: 90 }}
+          >
+            Reset
+          </Button>
+          <Button
+            type="link"
+            size="small"
+            onClick={() => {
+              confirm({ closeDropdown: false })
+              setSearchText(selectedKeys[0])
+              setSearchColumn(dataIndex)
+            }}
+          >
+            Filter
+          </Button>
+        </Space>
+      </div>
+    ),
+    filterIcon: (filtered) => (
+      <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />
+    ),
+    onFilter: (value, record) =>
+      record[dataIndex]
+        ? record[dataIndex]
+            .toString()
+            .toLowerCase()
+            .includes(value.toLowerCase())
+        : '',
+
+    // onFilterDropdownVisibleChange: (visible) => {
+    //   if (visible) {
+    //     setTimeout(() => this.searchInput.select(), 100)
+    //   }
+    // },
+
+  //  render: text =>searchColumn === dataIndex ? (
+  //       <Highlighter
+  //         highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
+  //         searchWords={[searchText]}
+  //         autoEscape
+  //         textToHighlight={text ? text.toString() : ''}
+  //       />
+  //     ) : (
+  //       text
+  //     )
+  })
+
+  const handleSearch = (selectedKeys, confirm, dataIndex) => {
+    confirm()
+    setSearchText(selectedKeys[0])
+    setSearchColumn(dataIndex)
+  }
+  const handleReset = (clearFilters) => {
+    clearFilters()
+    setSearchText('')
+  }
+
   const columns = [
     {
       title: 'Имя Фамилия',
       dataIndex: 'name',
       key: 'name',
       width: '30%',
-      render: (user) => (
-        <a href="https://web.telegram.org/k/" target="_blank">
-          {user}
+      ...getColumnSearchProps('name'),
+      render: (text) => (
+        <a href="https://web.telegram.org/k/" target="_blank" rel="noreferrer">
+          {text}
         </a>
       )
     },
@@ -111,6 +209,7 @@ export default function UserTable() {
     }
   ]
   const [isModalVisible, setIsModalVisible] = useState(false)
+
   const showModal = () => {
     setIsModalVisible(true)
   }

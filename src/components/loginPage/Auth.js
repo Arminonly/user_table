@@ -64,7 +64,7 @@ export default function Auth() {
           wrapperCol={{ offset: 8, span: 8 }}
           rules={[{ required: true, message: 'Please input input your Password: MIN-5 symbols',min:5 }]}
         >
-          <Input.Password type="password" placeholder="Password"  />
+          <Input.Password  type="password" placeholder="Password"  />
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 8, span: 8 }}>

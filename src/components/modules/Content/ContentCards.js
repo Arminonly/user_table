@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Card, Col, Row, Badge, Input, Modal } from 'antd'
-import { EditOutlined, CloseOutlined } from '@ant-design/icons'
+import { EditOutlined, CloseOutlined, AlertFilled } from '@ant-design/icons'
 
 const ContentCards = () => {
   const [isModalVisible, setIsModalVisible] = useState(false)
@@ -12,6 +12,24 @@ const ContentCards = () => {
   }
   const handleCancel = () => {
     setIsModalVisible(false)
+  }
+
+  const { confirm } = Modal
+  function showConfirm() {
+    confirm({
+      title: 'Вы уверены, что хотите удалить данный модуль?',
+      icon: <AlertFilled style={{ color: 'red' }} />,
+      okType: 'danger',
+      okText: 'удалить',
+      cancelText: 'отмена',
+      content: 'Some descriptions',
+      // onOk() {
+      //   alert('УДАЛИТЬ');
+      // },
+      // onCancel() {
+      //   alert('ОТМЕНА');
+      // },
+    })
   }
 
   const styles = {
@@ -36,7 +54,7 @@ const ContentCards = () => {
                 <Input />
                 <div style={styles.div}>
                   <EditOutlined onClick={showModal} /> &nbsp;&nbsp;
-                  <CloseOutlined />
+                  <CloseOutlined onClick={showConfirm} />
                 </div>
               </Card>
             </Badge.Ribbon>
@@ -48,7 +66,7 @@ const ContentCards = () => {
                 <Input />
                 <div style={styles.div}>
                   <EditOutlined onClick={showModal} /> &nbsp;&nbsp;
-                  <CloseOutlined />
+                  <CloseOutlined onClick={showConfirm} />
                 </div>
               </Card>
             </Badge.Ribbon>
@@ -60,7 +78,7 @@ const ContentCards = () => {
                 <Input />
                 <div style={styles.div}>
                   <EditOutlined onClick={showModal} /> &nbsp;&nbsp;
-                  <CloseOutlined />
+                  <CloseOutlined onClick={showConfirm} />
                 </div>
               </Card>
             </Badge.Ribbon>
@@ -72,7 +90,7 @@ const ContentCards = () => {
                 <Input />
                 <div style={styles.div}>
                   <EditOutlined onClick={showModal} /> &nbsp;&nbsp;
-                  <CloseOutlined />
+                  <CloseOutlined onClick={showConfirm} />
                 </div>
               </Card>
             </Badge.Ribbon>
@@ -89,7 +107,7 @@ const ContentCards = () => {
                 <Input />
                 <div style={styles.div}>
                   <EditOutlined onClick={showModal} /> &nbsp;&nbsp;
-                  <CloseOutlined />
+                  <CloseOutlined onClick={showConfirm} />
                 </div>
               </Card>
             </Badge.Ribbon>
@@ -101,7 +119,7 @@ const ContentCards = () => {
           onOk={handleOk}
           onCancel={handleCancel}
           okText="сохранить"
-            cancelText="отменить"
+          cancelText="отменить"
         >
           <Input placeholder="введите новые данные" />
         </Modal>

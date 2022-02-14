@@ -15,101 +15,101 @@ export default class UserTable extends React.Component {
     searchedColumn: '',
     modalIsVisible: false,
     }
-  getColumnSearchProps = (dataIndex) => ({
-    filterDropdown: ({
-      setSelectedKeys,
-      selectedKeys,
-      confirm,
-      clearFilters
-    }) => (
-      <div style={{ padding: 8 }}>
-        <Input
-          ref={(node) => {
-            this.searchInput = node
-          }}
-          placeholder={`Search ${dataIndex}`}
-          value={selectedKeys[0]}
-          onChange={(e) =>
-            setSelectedKeys(e.target.value ? [e.target.value] : [])
-          }
-          onPressEnter={() =>
-            this.handleSearch(selectedKeys, confirm, dataIndex)
-          }
-          style={{ marginBottom: 8, display: 'block' }}
-        />
-        <Space>
-          <Button
-            type="primary"
-            onClick={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
-            icon={<SearchOutlined />}
-            size="small"
-            style={{ width: 90 }}
-          >
-            Search
-          </Button>
-          <Button
-            onClick={() => this.handleReset(clearFilters)}
-            size="small"
-            style={{ width: 90 }}
-          >
-            Reset
-          </Button>
-          <Button
-            type="link"
-            size="small"
-            onClick={() => {
-              confirm({ closeDropdown: false })
-              this.setState({
-                searchText: selectedKeys[0],
-                searchedColumn: dataIndex
-              })
-            }}
-          >
-            Filter
-          </Button>
-        </Space>
-      </div>
-    ),
-    filterIcon: (filtered) => (
-      <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />
-    ),
-    onFilter: (value, record) =>
-      record[dataIndex]
-        ? record[dataIndex]
-            .toString()
-            .toLowerCase()
-            .includes(value.toLowerCase())
-        : '',
-    onFilterDropdownVisibleChange: (visible) => {
-      if (visible) {
-        setTimeout(() => this.searchInput.select(), 100)
-      }
-    },
-    render: (text) =>
-      this.state.searchedColumn === dataIndex ? (
-        <Highlighter
-          highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
-          searchWords={[this.state.searchText]}
-          autoEscape
-          textToHighlight={text ? text.toString() : ''}
-        />
-      ) : (
-        text
-      )
-  })
+  // getColumnSearchProps = (dataIndex) => ({
+  //   filterDropdown: ({
+  //     setSelectedKeys,
+  //     selectedKeys,
+  //     confirm,
+  //     clearFilters
+  //   }) => (
+  //     <div style={{ padding: 8 }}>
+  //       <Input
+  //         ref={(node) => {
+  //           this.searchInput = node
+  //         }}
+  //         placeholder={`Search ${dataIndex}`}
+  //         value={selectedKeys[0]}
+  //         onChange={(e) =>
+  //           setSelectedKeys(e.target.value ? [e.target.value] : [])
+  //         }
+  //         onPressEnter={() =>
+  //           this.handleSearch(selectedKeys, confirm, dataIndex)
+  //         }
+  //         style={{ marginBottom: 8, display: 'block' }}
+  //       />
+  //       <Space>
+  //         <Button
+  //           type="primary"
+  //           onClick={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
+  //           icon={<SearchOutlined />}
+  //           size="small"
+  //           style={{ width: 90 }}
+  //         >
+  //           Search
+  //         </Button>
+  //         <Button
+  //           onClick={() => this.handleReset(clearFilters)}
+  //           size="small"
+  //           style={{ width: 90 }}
+  //         >
+  //           Reset
+  //         </Button>
+  //         <Button
+  //           type="link"
+  //           size="small"
+  //           onClick={() => {
+  //             confirm({ closeDropdown: false })
+  //             this.setState({
+  //               searchText: selectedKeys[0],
+  //               searchedColumn: dataIndex
+  //             })
+  //           }}
+  //         >
+  //           Filter
+  //         </Button>
+  //       </Space>
+  //     </div>
+  //   ),
+  //   filterIcon: (filtered) => (
+  //     <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />
+  //   ),
+  //   onFilter: (value, record) =>
+  //     record[dataIndex]
+  //       ? record[dataIndex]
+  //           .toString()
+  //           .toLowerCase()
+  //           .includes(value.toLowerCase())
+  //       : '',
+  //   onFilterDropdownVisibleChange: (visible) => {
+  //     if (visible) {
+  //       setTimeout(() => this.searchInput.select(), 100)
+  //     }
+  //   },
+  //   render: (text) =>
+  //     this.state.searchedColumn === dataIndex ? (
+  //       <Highlighter
+  //         highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
+  //         searchWords={[this.state.searchText]}
+  //         autoEscape
+  //         textToHighlight={text ? text.toString() : ''}
+  //       />
+  //     ) : (
+  //       text
+  //     )
+  // })
 
-  handleSearch = (selectedKeys, confirm, dataIndex) => {
-    confirm()
-    this.setState({
-      searchText: selectedKeys[0],
-      searchedColumn: dataIndex
-    })
-  }
+  // handleSearch = (selectedKeys, confirm, dataIndex) => {
+  //   confirm()
+  //   this.setState({
+  //     searchText: selectedKeys[0],
+  //     searchedColumn: dataIndex
+  //   })
+  // }
 
-  handleReset = (clearFilters) => {
-    clearFilters()
-    this.setState({ searchText: '' })
-  }
+  // handleReset = (clearFilters) => {
+  //   clearFilters()
+  //   this.setState({ searchText: '' })
+  // }
   modalIsVisible(modalIsVisible) {
     this.setState({ modalIsVisible })
   }
@@ -121,9 +121,9 @@ export default class UserTable extends React.Component {
         dataIndex: 'name',
         key: 'name',
         width: '30%',
-        render: (text) => (
+        render: (user) => (
           <a href="https://web.telegram.org/k/" target="_blank">
-            {text}
+            {user}
           </a>
         )
       },
@@ -148,11 +148,17 @@ export default class UserTable extends React.Component {
         key: 'tags',
         render: (tags) => (
           <>
-            {tags.map((tag) => (
-              <Tag color="geekblue" key={tag}>
-                {tag}
-              </Tag>
-            ))}
+                 {tags.map(tag => {
+          let color = tag.length > 5 ? 'geekblue' : 'green';
+          if (tag === 'loser') {
+            color = 'volcano';
+          }
+          return (
+            <Tag color={color} key={tag}>
+              {tag.toUpperCase()}
+            </Tag>
+          );
+        })}
           </>
         ),
         filters: [
@@ -206,6 +212,7 @@ export default class UserTable extends React.Component {
         )
       }
     ]
+  
     return (
       <>
         <HeaderTitle />
@@ -225,11 +232,12 @@ export default class UserTable extends React.Component {
             okText="сохранить"
             cancelText="отменить"
             visible={this.state.modalIsVisible}
-            onOk={() => this.modalIsVisible(false)}
+            onOk={() => this.modalIsVisible(false) }
             onCancel={() => this.modalIsVisible(false)}
           >
-            <Input placeholder="введите новые данные" style={{marginBottom:5}}/>
-            
+            <Input
+             value={users?.name}
+             placeholder="введите новые данные" style={{marginBottom:5}}/>
             <Input placeholder="введите новые данные"/>
           </Modal>
         </p>

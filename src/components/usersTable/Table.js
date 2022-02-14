@@ -13,8 +13,8 @@ export default class UserTable extends React.Component {
   state = {
     searchText: '',
     searchedColumn: '',
-    modalIsVisible: false,
-    }
+    modalIsVisible: false
+  }
   // getColumnSearchProps = (dataIndex) => ({
   //   filterDropdown: ({
   //     setSelectedKeys,
@@ -148,17 +148,24 @@ export default class UserTable extends React.Component {
         key: 'tags',
         render: (tags) => (
           <>
-                 {tags.map(tag => {
-          let color = tag.length > 5 ? 'geekblue' : 'green';
-          if (tag === 'loser') {
-            color = 'volcano';
-          }
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
+            {tags.map((tag) => {
+              let color =
+                tag.length < 3
+                  ? '#FF1829'
+                  : tag.length < 5
+                  ? '#FFC618'
+                  : tag.length < 8
+                  ? '#41AC02'
+                  : '#FF1840'
+              if (tag === 'Базы данных') {
+                color = '#5118FF'
+              }
+              return (
+                <Tag color={color} key={tag}>
+                  {tag.toUpperCase()}
+                </Tag>
+              )
+            })}
           </>
         ),
         filters: [
@@ -212,7 +219,7 @@ export default class UserTable extends React.Component {
         )
       }
     ]
-  
+
     return (
       <>
         <HeaderTitle />
@@ -232,13 +239,15 @@ export default class UserTable extends React.Component {
             okText="сохранить"
             cancelText="отменить"
             visible={this.state.modalIsVisible}
-            onOk={() => this.modalIsVisible(false) }
+            onOk={() => this.modalIsVisible(false)}
             onCancel={() => this.modalIsVisible(false)}
           >
             <Input
-             value={users?.name}
-             placeholder="введите новые данные" style={{marginBottom:5}}/>
-            <Input placeholder="введите новые данные"/>
+              value={users?.name}
+              placeholder="введите новые данные"
+              style={{ marginBottom: 5 }}
+            />
+            <Input placeholder="введите новые данные" />
           </Modal>
         </p>
       </>

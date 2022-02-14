@@ -47,7 +47,7 @@ export default function Auth() {
         <Form.Item
           name="login"
           wrapperCol={{ offset: 8, span: 8 }}
-          rules={[{ required: true, message: 'Please input your Username!' }]}
+          rules={[{ required: true, message: 'Please input your Username (MIN-3, MAX-10 symbols!',min:3,max:10 }]}
         >
           <Input placeholder="login" />
         </Form.Item>
@@ -62,9 +62,9 @@ export default function Auth() {
         <Form.Item
           name="password"
           wrapperCol={{ offset: 8, span: 8 }}
-          rules={[{ required: true, message: 'Please input your Password!' }]}
+          rules={[{ required: true, message: 'Please input input your Password: MIN-5 symbols',min:5 }]}
         >
-          <Input.Password type="password" placeholder="Password" />
+          <Input.Password type="password" placeholder="Password"  />
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 8, span: 8 }}>

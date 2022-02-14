@@ -121,7 +121,6 @@ export default class UserTable extends React.Component {
         dataIndex: 'name',
         key: 'name',
         width: '30%',
-        ...this.getColumnSearchProps('name'),
         render: (text) => (
           <a href="https://web.telegram.org/k/" target="_blank">
             {text}
@@ -221,7 +220,7 @@ export default class UserTable extends React.Component {
         />
         <p>
           <Modal
-            title="изменить студента"
+            title="внести изменения"
             centered
             okText="сохранить"
             cancelText="отменить"
@@ -229,7 +228,9 @@ export default class UserTable extends React.Component {
             onOk={() => this.modalIsVisible(false)}
             onCancel={() => this.modalIsVisible(false)}
           >
-            <Input/>
+            <Input placeholder="введите новые данные" style={{marginBottom:5}}/>
+            
+            <Input placeholder="введите новые данные"/>
           </Modal>
         </p>
       </>

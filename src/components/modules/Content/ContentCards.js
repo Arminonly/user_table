@@ -1,8 +1,19 @@
-import React from 'react'
-import { Card, Col, Row, Badge, Input } from 'antd'
+import React, { useState } from 'react'
+import { Card, Col, Row, Badge, Input, Modal } from 'antd'
 import { EditOutlined, CloseOutlined } from '@ant-design/icons'
 
 const ContentCards = () => {
+  const [isModalVisible, setIsModalVisible] = useState(false)
+  const showModal = () => {
+    setIsModalVisible(true)
+  }
+  const handleOk = () => {
+    setIsModalVisible(false)
+  }
+  const handleCancel = () => {
+    setIsModalVisible(false)
+  }
+
   const styles = {
     div: {
       margin: '100px 5px 15px 280px',
@@ -20,11 +31,11 @@ const ContentCards = () => {
       <div className="site-card-wrapper" style={{ margin: '15px' }}>
         <Row gutter={[10, 15]}>
           <Col span={6}>
-            <Badge.Ribbon text='HTML/CSS' color={color}>
-              <Card title='HTML/CSS' size="default" hoverable={true}>
-              <Input/>
+            <Badge.Ribbon text="HTML/CSS" color={color}>
+              <Card title="HTML/CSS" size="default" hoverable={true}>
+                <Input />
                 <div style={styles.div}>
-                  <EditOutlined /> &nbsp;&nbsp;
+                  <EditOutlined onClick={showModal} /> &nbsp;&nbsp;
                   <CloseOutlined />
                 </div>
               </Card>
@@ -34,9 +45,9 @@ const ContentCards = () => {
           <Col span={6}>
             <Badge.Ribbon text="JS" color="#CDA4DE">
               <Card title="JS" size="default" hoverable={true}>
-              <Input/>
+                <Input />
                 <div style={styles.div}>
-                  <EditOutlined /> &nbsp;&nbsp;
+                  <EditOutlined onClick={showModal} /> &nbsp;&nbsp;
                   <CloseOutlined />
                 </div>
               </Card>
@@ -46,9 +57,9 @@ const ContentCards = () => {
           <Col span={6}>
             <Badge.Ribbon text="REACT" color="#87CEEB">
               <Card title="REACT" size="default" hoverable={true}>
-              <Input/>
+                <Input />
                 <div style={styles.div}>
-                  <EditOutlined /> &nbsp;&nbsp;
+                  <EditOutlined onClick={showModal} /> &nbsp;&nbsp;
                   <CloseOutlined />
                 </div>
               </Card>
@@ -58,9 +69,9 @@ const ContentCards = () => {
           <Col span={6}>
             <Badge.Ribbon text="Node" color="#9ACD32">
               <Card title="Node" size="default" hoverable={true}>
-              <Input/>
+                <Input />
                 <div style={styles.div}>
-                  <EditOutlined /> &nbsp;&nbsp;
+                  <EditOutlined onClick={showModal} /> &nbsp;&nbsp;
                   <CloseOutlined />
                 </div>
               </Card>
@@ -75,15 +86,25 @@ const ContentCards = () => {
                 size="default"
                 hoverable={true}
               >
-              <Input/>
+                <Input />
                 <div style={styles.div}>
-                  <EditOutlined /> &nbsp;&nbsp;
+                  <EditOutlined onClick={showModal} /> &nbsp;&nbsp;
                   <CloseOutlined />
                 </div>
               </Card>
             </Badge.Ribbon>
           </Col>
         </Row>
+        <Modal
+          title="внести изменения в модуль"
+          visible={isModalVisible}
+          onOk={handleOk}
+          onCancel={handleCancel}
+          okText="сохранить"
+            cancelText="отменить"
+        >
+          <Input placeholder="введите новые данные" />
+        </Modal>
       </div>
     </>
   )

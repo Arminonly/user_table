@@ -1,7 +1,6 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Table, Tag, Space, Input, Modal, Button } from 'antd'
-import Highlighter from 'react-highlight-words'
 import { SearchOutlined } from '@ant-design/icons'
 
 import { users } from './data'
@@ -22,9 +21,6 @@ export default function UserTable() {
     }) => (
       <div style={{ padding: 8 }}>
         <Input
-          // ref={node => {
-          //   searchInput = node;
-          // }}
           placeholder={`Search ${dataIndex}`}
           value={selectedKeys[0]}
           onChange={(e) =>
@@ -37,7 +33,7 @@ export default function UserTable() {
           <Button
             type="primary"
             onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-            icon={<SearchOutlined />}
+            icon={<SearchOutlined/>}
             size="small"
             style={{ width: 90 }}
           >
@@ -64,8 +60,8 @@ export default function UserTable() {
         </Space>
       </div>
     ),
-    filterIcon: (filtered) => (
-      <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />
+    filterIcon: () => (
+      <SearchOutlined style={{ color: 'lime', fontSize: '28px'}} />
     ),
     onFilter: (value, record) =>
       record[dataIndex]
@@ -74,23 +70,6 @@ export default function UserTable() {
             .toLowerCase()
             .includes(value.toLowerCase())
         : '',
-
-    // onFilterDropdownVisibleChange: (visible) => {
-    //   if (visible) {
-    //     setTimeout(() => this.searchInput.select(), 100)
-    //   }
-    // },
-
-  //  render: text =>searchColumn === dataIndex ? (
-  //       <Highlighter
-  //         highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
-  //         searchWords={[searchText]}
-  //         autoEscape
-  //         textToHighlight={text ? text.toString() : ''}
-  //       />
-  //     ) : (
-  //       text
-  //     )
   })
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -208,9 +187,9 @@ export default function UserTable() {
       )
     }
   ]
-  const [isModalVisible, setIsModalVisible] = useState(false)
 
-  const showModal = () => {
+  const [isModalVisible, setIsModalVisible] = useState(false)
+   const showModal = () => {
     setIsModalVisible(true)
   }
   const handleOk = () => {
@@ -232,7 +211,7 @@ export default function UserTable() {
           pageSizeOptions: [2, 5, 10, 15]
         }}
       />
-      <p>
+      <div>
         <Modal
           title="внести изменения"
           centered
@@ -242,10 +221,10 @@ export default function UserTable() {
           onOk={handleOk}
           onCancel={handleCancel}
         >
-          <Input placeholder="измениете имя" style={{ marginBottom: 5 }} />
+          <Input placeholder="измените имя" style={{ marginBottom: 5 }} />
           <Input placeholder="измените login" />
         </Modal>
-      </p>
+      </div>
     </>
   )
 }

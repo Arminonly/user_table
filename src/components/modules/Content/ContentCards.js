@@ -22,7 +22,7 @@ const ContentCards = () => {
       okType: 'danger',
       okText: 'удалить',
       cancelText: 'отмена',
-      content: 'Some descriptions',
+      // content: 'Some descriptions',
       // onOk() {
       //   alert('УДАЛИТЬ');
       // },

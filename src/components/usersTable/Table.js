@@ -10,7 +10,6 @@ export default function UserTable() {
   const dataSource = users.map((item) => ({ ...item, key: item.id }))
   const [searchText, setSearchText] = useState('')
   const [searchColumn, setSearchColumn] = useState('')
-  
 
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({
@@ -33,7 +32,7 @@ export default function UserTable() {
           <Button
             type="primary"
             onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-            icon={<SearchOutlined/>}
+            icon={<SearchOutlined />}
             size="small"
             style={{ width: 90 }}
           >
@@ -61,7 +60,7 @@ export default function UserTable() {
       </div>
     ),
     filterIcon: () => (
-      <SearchOutlined style={{ color: 'lime', fontSize: '28px'}} />
+      <SearchOutlined style={{ color: 'lime', fontSize: '28px' }} />
     ),
     onFilter: (value, record) =>
       record[dataIndex]
@@ -69,9 +68,8 @@ export default function UserTable() {
             .toString()
             .toLowerCase()
             .includes(value.toLowerCase())
-        : '',
+        : ''
   })
-
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm()
     setSearchText(selectedKeys[0])
@@ -81,7 +79,6 @@ export default function UserTable() {
     clearFilters()
     setSearchText('')
   }
-
   const columns = [
     {
       title: 'Имя Фамилия',
@@ -189,7 +186,7 @@ export default function UserTable() {
   ]
 
   const [isModalVisible, setIsModalVisible] = useState(false)
-   const showModal = () => {
+  const showModal = () => {
     setIsModalVisible(true)
   }
   const handleOk = () => {
